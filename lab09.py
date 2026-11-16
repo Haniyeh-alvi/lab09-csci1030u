@@ -13,7 +13,12 @@ def two_sum(nums, target):
     #   ...
     # TODO: return the indices [i, j] (i < j) of the two numbers in `nums` that add up
     #   to `target`. Assume there is exactly one answer.
-    pass
+    seen = {}
+    for j, num in enumerate(nums):
+        need = target - num
+        if need in seen:
+            return [seen[need], j]
+        seen[num] = j
 
 
 def max_profit(prices):
@@ -21,7 +26,12 @@ def max_profit(prices):
     #   ...
     # TODO: `prices[i]` is a stock price on day i. Return the most profit obtainable by
     #   buying on one day and selling on a LATER day. If no profit is possible, return 0.
-    pass
+        lowest = float("inf")
+    best = 0
+    for p in prices:
+        lowest = min(lowest, p)
+        best = max(best, p - lowest)
+    return best
 
 
 def max_subarray(nums):
@@ -29,7 +39,11 @@ def max_subarray(nums):
     #   ...
     # TODO: return the largest sum of any contiguous (in-a-row) block of numbers in
     #   `nums`. The list has at least one number.
-    pass
+    current = best = nums[0]
+    for num in nums[1:]:
+        current = max(num, current + num)
+        best = max(best, current)
+    return best
 
 
 def is_balanced(s):   # Part 4 - stretch (optional)
